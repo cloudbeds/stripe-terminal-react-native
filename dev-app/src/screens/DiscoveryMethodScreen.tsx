@@ -53,13 +53,13 @@ export default function DiscoveryMethodScreen() {
       {Platform.OS === 'android' ? (
         <>
           <ListItem onPress={() => onSelect('handoff')} title="Handoff" />
+        </>
+      ) : (
+        <>
           <ListItem
             onPress={() => onSelect('localMobile')}
             title="Local mobile"
           />
-        </>
-      ) : (
-        <>
           <ListItem
             onPress={() => onSelect('bluetoothProximity')}
             title="Bluetooth Proximity"
