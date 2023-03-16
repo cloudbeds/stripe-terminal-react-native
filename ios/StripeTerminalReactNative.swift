@@ -296,7 +296,7 @@ class StripeTerminalReactNative: RCTEventEmitter, DiscoveryDelegate, BluetoothRe
             return
         }
 
-        let connectionConfig = LocalMobileConnectionConfiguration(locationId: "tml_EefkQkoHpJAEzx") //TODO this needs to be changed somehow
+        let connectionConfig = LocalMobileConnectionConfiguration(locationId: params["locationId"])
 
         Terminal.shared.connectLocalMobileReader(selectedReader, delegate: self, connectionConfig: connectionConfig) { reader, error in
             if let reader = reader {
