@@ -295,8 +295,10 @@ class StripeTerminalReactNative: RCTEventEmitter, DiscoveryDelegate, BluetoothRe
             resolve(Errors.createError(code: CommonErrorType.InvalidRequiredParameter, message: "Could not find reader with id \(readerId ?? "")"))
             return
         }
+        
+        let locationId = params["locationId"] as? String ?? ""
 
-        let connectionConfig = LocalMobileConnectionConfiguration(locationId: params["locationId"])
+        let connectionConfig = LocalMobileConnectionConfiguration(locationId: locationId)
 
         Terminal.shared.connectLocalMobileReader(selectedReader, delegate: self, connectionConfig: connectionConfig) { reader, error in
             if let reader = reader {
@@ -759,7 +761,7 @@ class StripeTerminalReactNative: RCTEventEmitter, DiscoveryDelegate, BluetoothRe
     }
     
     func localMobileReader(_ reader: Reader, didFinishInstallingUpdate update: ReaderSoftwareUpdate?, error: Error?) {
-        reader(reader, didFinishInstallingUpdate: update, error: error)
+        self.reader(reader, didFinishInstallingUpdate: update, error: error)
     }
 
     func reader(_ reader: Reader, didRequestReaderInput inputOptions: ReaderInputOptions = []) {
@@ -768,7 +770,7 @@ class StripeTerminalReactNative: RCTEventEmitter, DiscoveryDelegate, BluetoothRe
     }
     
     func localMobileReader(_ reader: Reader, didRequestReaderInput inputOptions: ReaderInputOptions = []) {
-        self.reader(reader, inputOptions)
+        self.reader(reader, didRequestReaderInput: inputOptions)
     }
 
     func reader(_ reader: Reader, didRequestReaderDisplayMessage displayMessage: ReaderDisplayMessage) {
@@ -777,6 +779,6 @@ class StripeTerminalReactNative: RCTEventEmitter, DiscoveryDelegate, BluetoothRe
     }
     
     func localMobileReader(_ reader: Reader, didRequestReaderDisplayMessage displayMessage: ReaderDisplayMessage) {
-        self.reader(reader, displayMessage)
+        self.reader(reader, didRequestReaderDisplayMessage: displayMessage)
     }
 }
