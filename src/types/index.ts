@@ -45,6 +45,8 @@ export type ConnectUsbReaderParams = {
 export type ConnectLocalMobileParams = {
   reader: Reader.Type;
   locationId?: string;
+  merchantDisplayName?: string;
+  onBehalfOf?: string;
 };
 
 export type ConnectHandoffParams = {
